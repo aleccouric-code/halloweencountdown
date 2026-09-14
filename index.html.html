@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Halloween Countdown</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+  }
+</style>
+</head>
+<body>
+
+<div id="halloween-countdown" style="
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #FF7518 0%, #1a1a1a 100%);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  box-sizing: border-box;
+">
+  <div style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #FFA500; font-weight: 600;">
+    🎃 Countdown to Halloween
+  </div>
+  <div id="halloween-days" style="font-size: 42px; font-weight: 700; margin: 8px 0; color: #ffffff;">
+    --
+  </div>
+  <div style="font-size: 12px; color: #d9c7b8;">
+    Days Remaining
+  </div>
+</div>
+
+<script>
+(function() {
+  function updateCountdown() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var halloween = new Date(year, 9, 31); // Oct 31 (month is 0-indexed)
+
+    if (now > halloween) {
+      halloween = new Date(year + 1, 9, 31);
+    }
+
+    var msPerDay = 1000 * 60 * 60 * 24;
+    var diff = Math.ceil((halloween - now) / msPerDay);
+
+    document.getElementById('halloween-days').textContent = diff;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000 * 60 * 60);
+})();
+</script>
+
+</body>
+</html>
